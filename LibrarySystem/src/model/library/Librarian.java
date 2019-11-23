@@ -9,26 +9,33 @@ public class Librarian {
     private Library managingLibrary;
     private Book favBook;
 
+//  REQUIRES: All params not null
+//  MODIFIES: this
+//  EFFECTS: Create new librarian object
     public Librarian(String name, int age, Library lib, Book bk) {
-        //TODO: complete the specifications and implementation of this method
+        this.name = name;
+        this.age = age;
+        this.managingLibrary = lib;
+        this.favBook = bk;
     }
 
-    // getters
+    // EFFECTS: returns name of Librarian
     public String getName() {
-        //TODO: complete the specifications and implementation of this method
-        return null;
+        return this.name;
     }
+//    EFFECTS: returns age of librarian
     public int getAge() {
-        //TODO: complete the specifications and implementation of this method
-        return 0;
+        return this.age;
     }
+
+//    EFFECTS: returns managing library
     public Library getManagingLibrary() {
-        //TODO: complete the specifications and implementation of this method
-        return null;
+        return this.managingLibrary;
     }
+
+//    EFFECTS: returns favorite book
     public Book getFavBook() {
-        //TODO: complete the specifications and implementation of this method
-        return null;
+        return this.favBook;
     }
 
     // REQUIRES: lib != null
@@ -38,8 +45,12 @@ public class Librarian {
     //          also have an associated librarian field? Does it make a
     //          difference in the implementation of this method?
     public boolean changeLibrary(Library lib) {
-        //TODO: complete the specifications and implementation of this method
-        return false;
+       if(managingLibrary.equals(lib)) {
+           return false;
+       }
+
+       managingLibrary = lib;
+       return true;
     }
 
 

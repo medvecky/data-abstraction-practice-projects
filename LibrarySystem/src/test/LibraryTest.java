@@ -68,6 +68,4 @@ public class LibraryTest {
         assertEquals(testLib.returnBook(textBook), true);
         assertEquals(testLib.canLoan(textBook), true);
     }
-
-
 }
