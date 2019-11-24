@@ -1,6 +1,7 @@
 package ui;
 
 import model.Contact;
+import model.ContactType;
 
 import java.util.Scanner;
 
@@ -9,11 +10,24 @@ public class Main {
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
         System.out.println("To add a new contact, type in their name, then press 'enter':");
-        // TODO: Create a Contact object "c' here with the name read from the scanner, you can read input from the scanner
-        // TODO: by calling next() on the scanner
-        System.out.println("Add a phone number for " + //TODO: get the name field of the "c" object here + ":");
-                // TODO: set the number of the Contact object "c" to the user input read from the scanner
-                System.out.println("Would you like to call " + c.getName() + " now? Type 'y' for yes, 'n' for no.");
+        String name = s.next();
+        System.out.println("Enter number and press 'enter':");
+        String number = s.next();
+        System.out.println("Enter type 1. for work, 2. for friend, 3 for family and press 'enter':");
+        String type_string = s.next();
+        ContactType type = ContactType.FAMILY;
+        switch (type_string) {
+            case "1":
+                type = ContactType.WORK;
+                break;
+            case "2":
+                type = ContactType.FRIEND;
+                break;
+            case "3":
+                type = ContactType.FAMILY;
+        }
+        Contact c = new Contact(name, number, type);
+        System.out.println("Would you like to call " + c.getName() + " now? Type 'y' for yes, 'n' for no.");
         options(c, s);
     }
 
@@ -23,6 +37,7 @@ public class Main {
             System.out.println("Enter a date for the call in the format MM/DD/YY:");
             c.call(s.next());
             System.out.println("Here is your updated call history:");
+            c.getCallLog().forEach(System.out::println);
         } else if (option.equals("n")) {
             System.out.println("Call history: No Calls.");
         }

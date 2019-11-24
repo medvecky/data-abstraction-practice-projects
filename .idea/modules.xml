@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Band/Band.iml" filepath="$PROJECT_DIR$/Band/Band.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Contact/Contact.iml" filepath="$PROJECT_DIR$/Contact/Contact.iml" />
       <module fileurl="file://$PROJECT_DIR$/FriendNet/FriendNet.iml" filepath="$PROJECT_DIR$/FriendNet/FriendNet.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibrarySystem/LibrarySystem.iml" filepath="$PROJECT_DIR$/LibrarySystem/LibrarySystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/TransactionSummary/TransactionSummary.iml" filepath="$PROJECT_DIR$/TransactionSummary/TransactionSummary.iml" />
