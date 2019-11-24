@@ -32,5 +32,4 @@ public class EventTest {
         assertEquals(ev4.getEventType(), SCHOOL);
     }
 
-
 }

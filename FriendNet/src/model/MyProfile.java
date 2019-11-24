@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MyProfile {
 
@@ -12,53 +14,63 @@ public class MyProfile {
     private List<Event> upcomingEvents;
 
     public MyProfile(String nm, int age, String locn, String work) {
-        // TODO: complete the implementation of this method
+        this.name = nm;
+        this.age = age;
+        this.currentLocation = locn;
+        this.workPlace = work;
+        friendsList = new ArrayList<>();
+        upcomingEvents = new ArrayList<>();
     }
 
     // getters
     public String getName() {
-        // TODO: complete the implementation of this method
-        return null;
+        return name;
     }
+
     public int getAge() {
-        // TODO: complete the implementation of this method
-        return 0;
+        return age;
     }
+
     public String getCurrentLocation() {
-        // TODO: complete the implementation of this method
-        return null;
+        return currentLocation;
     }
+
     public String getWorkPlace() {
-        // TODO: complete the implementation of this method
-        return null;
-
+        return workPlace;
     }
+
     public int upcomingEventNum() {
-        // TODO: complete the implementation of this method
-        return 0;
+        return upcomingEvents.size();
+    }
 
-    }
     public List<MyProfile> getFriendsList() {
-        // TODO: complete the implementation of this method
-        return null;
+        return friendsList;
     }
+
     public List<Event> getEventList() {
-        // TODO: complete the implementation of this method
-        return null;
+        return upcomingEvents;
     }
 
     // REQUIRES: f is not already in friendsList
     // MODIFIES: this
     // EFFECTS: consumes a MyProfile object, a friend f, and adds it to the friendsList
     public void addFriend(MyProfile f) {
-        // TODO: complete the implementation of this method
+        friendsList.add(f);
     }
 
     // MODIFIES: this
     // EFFECTS: removes a friend with the given name from this. If removal is successful, return true, else
     //          return false
     public boolean unFriend(String nm) {
-        // TODO: complete the implementation of this method
+        if (friendsList.size() > 0) {
+            Optional<MyProfile> foundFriend = friendsList.stream()
+                    .filter(myProfile -> myProfile.getName().equals(nm))
+                    .findFirst();
+            if (foundFriend.isPresent()) {
+                friendsList.remove(foundFriend.get());
+                return true;
+            }
+        }
         return false;
     }
 
@@ -66,49 +78,73 @@ public class MyProfile {
     // MODIFIES: this
     // EFFECTS: adds the given event to the list of upcoming events
     public void addEvent(Event ev) {
-        // TODO: complete the implementation of this method
+        upcomingEvents.add(ev);
     }
 
     // MODIFIES: this
     // EFFECTS: removes an event with the given name. If removal is successful, return true, else return false
     public boolean removeEvent(String nm) {
-        // TODO: complete the implementation of this method
+        if (upcomingEvents.size() > 0) {
+            Optional<Event> foundEvent = upcomingEvents.stream()
+                    .filter(event -> event.getName().equals(nm))
+                    .findFirst();
+            if (foundEvent.isPresent()) {
+                upcomingEvents.remove(foundEvent.get());
+                return true;
+            }
+        }
         return false;
     }
 
     // EFFECTS: returns the number of events that are at the current location of this person
     public int eventNumNearMe() {
-        // TODO: complete the implementation of this method
-        return 0;
+        return (int) upcomingEvents.stream()
+                .filter(event -> event.getLocation().equals(currentLocation)).count();
     }
 
     // EFFECTS: returns the number of events of the given type et
     public int specificEventType(EventType et) {
-        // TODO: complete the implementation of this method
-        return 0;
+        return (int) upcomingEvents.stream()
+                .filter(event -> event.getEventType().equals(et)).count();
     }
 
     // EFFECTS: prints events of  type et to the console
     //          Hint: is there a method you have already written that you can use?
     public void printEventSchedule(EventType et) {
-        // TODO: complete the implementation of this method
+        upcomingEvents.stream()
+                .filter(event -> event.getEventType().equals(et))
+                .forEach(event -> System.out.println(event.getName()));
     }
 
     // EFFECTS: prints out the list of friends that this MyProfile has
     public void printFriendNames() {
-        // TODO: complete the implementation of this method
+       friendsList.forEach(friend -> System.out.println(friend.getName()));
     }
 
     // EFFECTS: prints out the names of friends who live at the same location associated with this profile
     public void printFriendsNearMe() {
-        // TODO: complete the implementation of this method
+        friendsList.stream()
+                .filter(friend -> friend.getCurrentLocation().equals(currentLocation))
+                .forEach(friend -> System.out.println(friend.getName()));
     }
 
     // EFFECTS: produces true if this profile has a friend with the given name,
     //          OR if any of this profile's friends has a friend with the given name
     //          Hint: use recursion!
     public boolean canFindPerson(String name) {
-        // TODO: complete the implementation of this method
+        if (this.friendsList.isEmpty()) return false;
+
+        for (MyProfile p : friendsList) {
+            if (p.getName().equals(name)) {
+                return true;
+            }
+        }
+
+        for (MyProfile p : friendsList) {
+            if (p.canFindPerson(name)) {
+                return true;
+            }
+        }
         return false;
     }
 

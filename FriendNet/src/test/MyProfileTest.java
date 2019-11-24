@@ -95,6 +95,4 @@ public class MyProfileTest {
         assertEquals(mainProfile.upcomingEventNum(), 3);
     }
 
-    // TODO: write some more test to obtain 100% test coverage
-
 }
