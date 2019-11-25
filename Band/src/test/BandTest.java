@@ -70,6 +70,4 @@ public class BandTest {
         band.playGig(145);
         assertEquals(band.averagePerShow(), (100+25.75+33.33+145)/4, 0.01);
     }
-
-
 }

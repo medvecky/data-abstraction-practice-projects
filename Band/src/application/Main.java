@@ -18,6 +18,4 @@ public class Main {
         System.out.println("Foo Fighters have: $" + band.getCurrentMoney() + " now");
         System.out.println("Foo Fighters made: $" + band.averagePerShow() + " per show");
     }
-
-
 }
